@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma/prisma"
+import { prisma } from "@/prisma/connection"
 
 export const getUserByEmail = async (email: string) => {
     const user = await prisma.user.findUnique({
