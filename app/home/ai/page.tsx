@@ -5,7 +5,7 @@ export default function TchindaAIPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Tchinda AI Assistant</h1>
-      <Card className="w-full max-w-3xl mx-auto">
+      <Card className="w-full mx-auto">
         <CardHeader>
           <CardTitle>Chat with Tchinda AI</CardTitle>
           <CardDescription>Get information about administrative procedures and documents in Cameroon</CardDescription>

@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { currentUser } from "@/utils/data/auth"
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const user = await currentUser()
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Your Profile</h1>
@@ -9,8 +11,8 @@ export default function ProfilePage() {
           <CardTitle>Personal Information</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>Name: John Doe</p>
-          <p>Email: john.doe@example.com</p>
+          <p>Name: {user!.name || "N/A"}</p>
+          <p>Email: {user!.email}</p>
           <p>Membership: Premium</p>
         </CardContent>
       </Card>
