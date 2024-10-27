@@ -34,22 +34,40 @@ export default function TchindaAIChat() {
     setInput('')
     setIsTyping(true)
 
-    // TODO: Implement actual AI response logic
-    // For now, we'll just simulate a response
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/ai', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ messages: [...messages, newMessage] }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI response');
+      }
+
+      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       const aiResponse: Message = { 
         id: Date.now(), 
         role: 'ai', 
-        content: 'This is a simulated AI response. I can provide information about administrative procedures and documents in Cameroon.'
+        content: data.response
       }
       setMessages(prev => [...prev, aiResponse])
+    } catch (error) {
+      console.error('Error getting AI response:', error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to get AI response. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
       setIsTyping(false)
-    }, 1500)
-
-    toast({
-      title: "Message Sent",
-      description: "Your message has been sent to Tchinda AI.",
-    })
+    }
   }
 
   return (
@@ -97,7 +115,7 @@ export default function TchindaAIChat() {
             placeholder="Type your message..."
             className="flex-1"
           />
-          <Button type="submit" size="icon">
+          <Button type="submit" size="icon" disabled={isTyping}>
             <IconSend size={18} />
           </Button>
         </form>
