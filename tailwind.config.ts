@@ -59,7 +59,20 @@ const config: Config = {
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
-  			}
+  			},
+			typography: {
+				DEFAULT: {
+				  css: {
+					maxWidth: 'none',
+					color: 'inherit',
+					a: {
+					  color: 'inherit',
+					  textDecoration: 'underline',
+					},
+					// Add more custom styles as needed
+				  },
+				},
+			  },
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -90,6 +103,6 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography'),],
 };
 export default config;

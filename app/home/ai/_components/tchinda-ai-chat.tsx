@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
 import { IconSend, IconRobot, IconUser } from '@tabler/icons-react'
+import ReactMarkdown from 'react-markdown'
 
 type Message = {
   id: number;
@@ -88,7 +89,13 @@ export default function TchindaAIChat() {
                   {message.role === 'user' ? <IconUser size={24} /> : <IconRobot size={24} />}
                 </div>
                 <div className={`p-3 rounded-lg ${message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-secondary'}`}>
-                  {message.content}
+                  {message.role === 'user' ? (
+                    message.content
+                  ) : (
+                    <ReactMarkdown className="prose dark:prose-invert max-w-none">
+                      {message.content}
+                    </ReactMarkdown>
+                  )}
                 </div>
               </div>
             </motion.div>
