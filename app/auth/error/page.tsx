@@ -2,7 +2,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-export default function AuthErrorPage({ searchParams }: { searchParams: { error: string } }) {
+type AuthErrorPageProps = {
+  searchParams: { error?: string }
+}
+
+export default function AuthErrorPage({ searchParams }: AuthErrorPageProps) {
   const error = searchParams.error || 'An unknown error occurred'
 
   return (
