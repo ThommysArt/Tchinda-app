@@ -4,7 +4,7 @@ import {
   apiAuthPrefix,
   authRoutes,
   publicRoutes,
-} from "@/constants/routes";
+} from "@/utils/routes";
 import { NextResponse } from "next/server";
 
 const authConfig = {
